@@ -1,0 +1,9 @@
+{
+	"name": "BtnSpeed",
+	"plugin-id": "Button",
+	"sid": 809614121782864,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": []
+}

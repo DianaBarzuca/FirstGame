@@ -1,0 +1,9 @@
+{
+	"name": "BtnFireRate",
+	"plugin-id": "Button",
+	"sid": 628035249643293,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": []
+}

@@ -1,0 +1,1510 @@
+{
+	"name": "Event sheet 1",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "CanShoot",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 592655972610502
+		},
+		{
+			"eventType": "variable",
+			"name": "Score",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 888951767429677
+		},
+		{
+			"eventType": "variable",
+			"name": "XP",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 139624828816488
+		},
+		{
+			"eventType": "variable",
+			"name": "MaxXP",
+			"type": "number",
+			"initialValue": "100",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 547809940264647
+		},
+		{
+			"eventType": "variable",
+			"name": "Player_lvl",
+			"type": "number",
+			"initialValue": "1",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 658540061623457
+		},
+		{
+			"eventType": "variable",
+			"name": "PlayerDmg",
+			"type": "number",
+			"initialValue": "1",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 437285029477645
+		},
+		{
+			"eventType": "variable",
+			"name": "PlayerSpeed",
+			"type": "number",
+			"initialValue": "50",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 512924666652785
+		},
+		{
+			"eventType": "variable",
+			"name": "FireRate",
+			"type": "number",
+			"initialValue": "0.3",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 427815163341929
+		},
+		{
+			"eventType": "variable",
+			"name": "PlayerHealth",
+			"type": "number",
+			"initialValue": "2",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 135493692564911
+		},
+		{
+			"eventType": "variable",
+			"name": "SpawnRate",
+			"type": "number",
+			"initialValue": "2",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 822103360221813
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 589184801263173
+				}
+			],
+			"actions": [
+				{
+					"id": "look-parallel-to-layout",
+					"objectClass": "3DCamera",
+					"sid": 941753409909641,
+					"parameters": {
+						"cam-x": "Player.X",
+						"cam-y": "Player.Y",
+						"cam-z": "10",
+						"look-angle": "Player.Angle"
+					}
+				},
+				{
+					"id": "move-to-position",
+					"objectClass": "Enemy",
+					"sid": 279387644976495,
+					"behaviorType": "MoveTo",
+					"parameters": {
+						"x": "Player.X",
+						"y": "Player.Y",
+						"mode": "direct"
+					}
+				},
+				{
+					"id": "set-animation-frame",
+					"objectClass": "Gun",
+					"sid": 774739911924513,
+					"parameters": {
+						"frame-number": "0"
+					}
+				},
+				{
+					"id": "set-speed",
+					"objectClass": "Player",
+					"sid": 915453711256371,
+					"behaviorType": "Custom",
+					"parameters": {
+						"which": "overall",
+						"speed": "Player.Custom.Speed * 0.85"
+					}
+				},
+				{
+					"id": "set-speed",
+					"objectClass": "Player",
+					"sid": 831641562215466,
+					"behaviorType": "Custom",
+					"parameters": {
+						"which": "overall",
+						"speed": "min(Player.Custom.Speed, PlayerSpeed)"
+					}
+				}
+			],
+			"sid": 370627597550907,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 185540958925202,
+							"parameters": {
+								"variable": "Player_lvl",
+								"comparison": 5,
+								"value": "5"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-position",
+							"objectClass": "Puffy",
+							"sid": 418647392986310,
+							"behaviorType": "MoveTo",
+							"parameters": {
+								"x": "Player.X",
+								"y": "Player.Y",
+								"mode": "direct"
+							}
+						}
+					],
+					"sid": 567158906810417
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "Player",
+							"sid": 214500034028310,
+							"parameters": {
+								"instance-variable": "IsDead"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-z-elevation",
+							"objectClass": "Player",
+							"sid": 662776785405773,
+							"parameters": {
+								"z": "Player.ZElevation + 15"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "Player",
+							"sid": 779203345641797,
+							"parameters": {
+								"angle": "Player.Angle + 20"
+							}
+						}
+					],
+					"sid": 259679016557524
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 667735305770778
+				}
+			],
+			"actions": [
+				{
+					"id": "request-pointer-lock",
+					"objectClass": "Mouse",
+					"sid": 270360898161022,
+					"parameters": {
+						"unadjusted-movement": false
+					}
+				},
+				{
+					"id": "set-position",
+					"objectClass": "Aim",
+					"sid": 380296534202998,
+					"parameters": {
+						"x": "ViewportWidth(\"UI\") / 2",
+						"y": "ViewportHeight(\"UI\") / 2"
+					}
+				},
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 360592883279284,
+					"parameters": {
+						"time-scale": "1.0"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 572936496085322,
+					"parameters": {
+						"variable": "XP"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 686283935064682,
+					"parameters": {
+						"variable": "PlayerHealth"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 849851715267086,
+					"parameters": {
+						"variable": "PlayerSpeed"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 123165063759522,
+					"parameters": {
+						"variable": "PlayerDmg"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 427764549548473,
+					"parameters": {
+						"variable": "FireRate"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 640920420642563,
+					"parameters": {
+						"variable": "Score"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 534475429699197,
+					"parameters": {
+						"variable": "Player_lvl"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 943943377207139,
+					"parameters": {
+						"variable": "MaxXP"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 706894548891532,
+					"parameters": {
+						"variable": "CanShoot"
+					}
+				},
+				{
+					"id": "reset-eventvar",
+					"objectClass": "System",
+					"sid": 966927049845354,
+					"parameters": {
+						"variable": "SpawnRate"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "Score",
+					"sid": 177606671507393,
+					"parameters": {
+						"text": "\"Kills: \" &Score"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "Stats",
+					"sid": 768005229091889,
+					"parameters": {
+						"text": "\"XP: \" &XP"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "LVL",
+					"sid": 991356179581466,
+					"parameters": {
+						"text": "\"LVL: \" &Player_lvl"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "HP",
+					"sid": 976077878062615,
+					"parameters": {
+						"text": "\"HP: \" &PlayerHealth"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "DMG",
+					"sid": 131423647170875,
+					"parameters": {
+						"text": "\"DMG: \" &PlayerDmg"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "MS",
+					"sid": 820126907104584,
+					"parameters": {
+						"text": "\"MS: \" &PlayerSpeed"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "ROF",
+					"sid": 844019993579520,
+					"parameters": {
+						"text": "\"ROF: \" &FireRate"
+					}
+				}
+			],
+			"sid": 995675458928417
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "mouse-button-is-down",
+					"objectClass": "Mouse",
+					"sid": 719457683563419,
+					"parameters": {
+						"mouse-button": "left"
+					}
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 815636769436802,
+					"parameters": {
+						"variable": "CanShoot"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "spawn-another-object",
+					"objectClass": "Player",
+					"sid": 247483890264233,
+					"parameters": {
+						"object": "Bullet",
+						"layer": "0",
+						"image-point": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-angle",
+					"objectClass": "Bullet",
+					"sid": 778357301739841,
+					"parameters": {
+						"angle": "Player.Angle"
+					}
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 199679734463656,
+					"parameters": {
+						"variable": "CanShoot",
+						"value": "false"
+					}
+				},
+				{
+					"id": "set-animation-frame",
+					"objectClass": "Gun",
+					"sid": 368049677739893,
+					"parameters": {
+						"frame-number": "1"
+					}
+				},
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 634570994468749,
+					"parameters": {
+						"seconds": "FireRate",
+						"use-timescale": true
+					}
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 582029351017806,
+					"parameters": {
+						"variable": "CanShoot",
+						"value": "true"
+					}
+				},
+				{
+					"id": "set-animation-frame",
+					"objectClass": "Gun",
+					"sid": 763399774190390,
+					"parameters": {
+						"frame-number": "0"
+					}
+				}
+			],
+			"sid": 594779411517562
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "Enemy",
+					"sid": 983737401445869,
+					"parameters": {
+						"object": "Bullet"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "subtract-from-instvar",
+					"objectClass": "Enemy",
+					"sid": 804580832570580,
+					"parameters": {
+						"instance-variable": "Health",
+						"value": "1"
+					}
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Bullet",
+					"sid": 367574772822745
+				}
+			],
+			"sid": 521487847444209
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-instance-variable",
+					"objectClass": "Enemy",
+					"sid": 535715769270179,
+					"parameters": {
+						"instance-variable": "Health",
+						"comparison": 3,
+						"value": "0"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Enemy",
+					"sid": 121558171774973
+				},
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 229583987046071,
+					"parameters": {
+						"variable": "Score",
+						"value": "1"
+					}
+				},
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 551620617283026,
+					"parameters": {
+						"variable": "XP",
+						"value": "20"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "Score",
+					"sid": 269422751124152,
+					"parameters": {
+						"text": "\"Kills: \" &Score"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "Stats",
+					"sid": 342797744087954,
+					"parameters": {
+						"text": "\"XP: \" &XP"
+					}
+				}
+			],
+			"sid": 209319479372705
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "key-is-down",
+					"objectClass": "Keyboard",
+					"sid": 455846991250051,
+					"parameters": {
+						"key": 87
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "accelerate-toward-angle",
+					"objectClass": "Player",
+					"sid": 718027948575526,
+					"behaviorType": "Custom",
+					"parameters": {
+						"acceleration": "2000",
+						"angle": "Player.Angle"
+					}
+				}
+			],
+			"sid": 984997989468796
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "key-is-down",
+					"objectClass": "Keyboard",
+					"sid": 266711996868099,
+					"parameters": {
+						"key": 65
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "accelerate-toward-angle",
+					"objectClass": "Player",
+					"sid": 973535808178141,
+					"behaviorType": "Custom",
+					"parameters": {
+						"acceleration": "2000",
+						"angle": "Player.Angle - 90"
+					}
+				}
+			],
+			"sid": 539988995146161
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "key-is-down",
+					"objectClass": "Keyboard",
+					"sid": 303281999288122,
+					"parameters": {
+						"key": 83
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "accelerate-toward-angle",
+					"objectClass": "Player",
+					"sid": 932027009327061,
+					"behaviorType": "Custom",
+					"parameters": {
+						"acceleration": "2000",
+						"angle": "Player.Angle + 180"
+					}
+				}
+			],
+			"sid": 975524133376156
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "key-is-down",
+					"objectClass": "Keyboard",
+					"sid": 566545446855580,
+					"parameters": {
+						"key": 68
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "accelerate-toward-angle",
+					"objectClass": "Player",
+					"sid": 600219523251004,
+					"behaviorType": "Custom",
+					"parameters": {
+						"acceleration": "2000",
+						"angle": "Player.Angle + 90"
+					}
+				}
+			],
+			"sid": 933569110999672
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-movement",
+					"objectClass": "Mouse",
+					"sid": 836785622440257
+				},
+				{
+					"id": "has-pointer-lock",
+					"objectClass": "Mouse",
+					"sid": 980141197242649
+				}
+			],
+			"actions": [
+				{
+					"id": "set-angle",
+					"objectClass": "Player",
+					"sid": 685250506607707,
+					"parameters": {
+						"angle": "Player.Angle + (Mouse.MovementX * 0.2)"
+					}
+				}
+			],
+			"sid": 635546568900365
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-x-seconds",
+					"objectClass": "System",
+					"sid": 135765536081835,
+					"parameters": {
+						"interval-seconds": "SpawnRate"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 192342403953235,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-x",
+							"objectClass": "Player",
+							"sid": 927813718496047,
+							"parameters": {
+								"comparison": 2,
+								"x-co-ordinate": "840"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 771475206226869,
+							"parameters": {
+								"object-to-create": "Enemy",
+								"layer": "0",
+								"x": "random(1200, 1450)",
+								"y": "random(150, 780)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 919373136426792
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-x",
+							"objectClass": "Player",
+							"sid": 797475026073523,
+							"parameters": {
+								"comparison": 5,
+								"x-co-ordinate": "840"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 679639147971629,
+							"parameters": {
+								"object-to-create": "Enemy",
+								"layer": "0",
+								"x": "random(200, 450)",
+								"y": "random(150, 780)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 240205294366453
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "Enemy",
+					"sid": 144614885681527
+				}
+			],
+			"actions": [
+				{
+					"id": "set-z-elevation",
+					"objectClass": "Enemy",
+					"sid": 642545849327823,
+					"parameters": {
+						"z": "0"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "Enemy",
+					"sid": 894206636618477,
+					"parameters": {
+						"instance-variable": "Health",
+						"value": "2+Player_lvl"
+					}
+				},
+				{
+					"id": "set-max-speed",
+					"objectClass": "Enemy",
+					"sid": 675283718529293,
+					"behaviorType": "MoveTo",
+					"parameters": {
+						"max-speed": "40 + (Player_lvl * 5)"
+					}
+				}
+			],
+			"sid": 677931011696542
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-x-seconds",
+					"objectClass": "System",
+					"sid": 912142332281942,
+					"parameters": {
+						"interval-seconds": "10.0"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 277532563713088,
+					"parameters": {
+						"variable": "SpawnRate",
+						"value": "max(0.4, SpawnRate - 0.1)"
+					}
+				}
+			],
+			"sid": 550894922790930
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "Player",
+					"sid": 639048940322469,
+					"parameters": {
+						"object": "Enemy"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "subtract-from-eventvar",
+					"objectClass": "System",
+					"sid": 612677552065257,
+					"parameters": {
+						"variable": "PlayerHealth",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "HP",
+					"sid": 123232837899265,
+					"parameters": {
+						"text": "\"HP: \" &PlayerHealth"
+					}
+				}
+			],
+			"sid": 672765771625323
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "Player",
+					"sid": 569945307766728,
+					"parameters": {
+						"object": "Wall"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "push-out-solid",
+					"objectClass": "Player",
+					"sid": 388870643615994,
+					"behaviorType": "Custom",
+					"parameters": {
+						"direction": "nearest"
+					}
+				}
+			],
+			"sid": 440206808235234
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 454784258514174,
+					"parameters": {
+						"variable": "PlayerHealth",
+						"comparison": 3,
+						"value": "0"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Player",
+					"sid": 546164582458289
+				},
+				{
+					"id": "restart-layout",
+					"objectClass": "System",
+					"sid": 784416930980253
+				}
+			],
+			"sid": 342228494285916
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 279718056965969,
+					"parameters": {
+						"variable": "XP",
+						"comparison": 5,
+						"value": "MaxXP"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "subtract-from-eventvar",
+					"objectClass": "System",
+					"sid": 620928323565495,
+					"parameters": {
+						"variable": "XP",
+						"value": "MaxXP"
+					}
+				},
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 135467901395367,
+					"parameters": {
+						"variable": "Player_lvl",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 947506659929633,
+					"parameters": {
+						"variable": "MaxXP",
+						"value": "MaxXP*1.5"
+					}
+				},
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 370613400517080,
+					"parameters": {
+						"time-scale": "0"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "LVL",
+					"sid": 538625539301682,
+					"parameters": {
+						"text": "\"LVL: \" &Player_lvl"
+					}
+				},
+				{
+					"id": "release-pointer-lock",
+					"objectClass": "Mouse",
+					"sid": 256872588025020
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnHealth",
+					"sid": 219310990125204,
+					"parameters": {
+						"visibility": "visible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnDamage",
+					"sid": 910811273406126,
+					"parameters": {
+						"visibility": "visible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnSpeed",
+					"sid": 916952483905790,
+					"parameters": {
+						"visibility": "visible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnFireRate",
+					"sid": 503508684272413,
+					"parameters": {
+						"visibility": "visible"
+					}
+				}
+			],
+			"sid": 224426721386272
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "BtnHealth",
+					"sid": 223876567617982
+				}
+			],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 493137674756434,
+					"parameters": {
+						"variable": "PlayerHealth",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "HP",
+					"sid": 473137592057724,
+					"parameters": {
+						"text": "\"HP: \" &PlayerHealth"
+					}
+				},
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 925011010338462,
+					"parameters": {
+						"time-scale": "1.0"
+					}
+				},
+				{
+					"id": "request-pointer-lock",
+					"objectClass": "Mouse",
+					"sid": 521211554005572,
+					"parameters": {
+						"unadjusted-movement": false
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnHealth",
+					"sid": 727384588349989,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnDamage",
+					"sid": 990511124309861,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnSpeed",
+					"sid": 991612204988386,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnFireRate",
+					"sid": 799099533787604,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 111938687161106
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "BtnDamage",
+					"sid": 151212808855886
+				}
+			],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 129137327471427,
+					"parameters": {
+						"variable": "PlayerDmg",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "DMG",
+					"sid": 619097814779889,
+					"parameters": {
+						"text": "\"DMG: \" &PlayerDmg"
+					}
+				},
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 511048857648844,
+					"parameters": {
+						"time-scale": "1.0"
+					}
+				},
+				{
+					"id": "request-pointer-lock",
+					"objectClass": "Mouse",
+					"sid": 506084286859615,
+					"parameters": {
+						"unadjusted-movement": false
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnHealth",
+					"sid": 407438698416290,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnDamage",
+					"sid": 637330439144031,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnSpeed",
+					"sid": 360527704375247,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnFireRate",
+					"sid": 295225011240189,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 141922221683299
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "BtnSpeed",
+					"sid": 446003320995253
+				}
+			],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 615552269542193,
+					"parameters": {
+						"variable": "PlayerSpeed",
+						"value": "20"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "MS",
+					"sid": 428468660752376,
+					"parameters": {
+						"text": "\"MS: \" &PlayerSpeed"
+					}
+				},
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 164135520357408,
+					"parameters": {
+						"time-scale": "1.0"
+					}
+				},
+				{
+					"id": "request-pointer-lock",
+					"objectClass": "Mouse",
+					"sid": 531894227664410,
+					"parameters": {
+						"unadjusted-movement": false
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnHealth",
+					"sid": 793884609570165,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnDamage",
+					"sid": 747533741097682,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnSpeed",
+					"sid": 379188243820544,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnFireRate",
+					"sid": 104941263856001,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 552399560847212
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "BtnFireRate",
+					"sid": 561707022514570
+				},
+				{
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 300092798812777,
+					"parameters": {
+						"variable": "FireRate",
+						"comparison": 4,
+						"value": "0.05"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "subtract-from-eventvar",
+					"objectClass": "System",
+					"sid": 963539200801417,
+					"parameters": {
+						"variable": "FireRate",
+						"value": "0.05"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "ROF",
+					"sid": 528351922933869,
+					"parameters": {
+						"text": "\"ROF: \" &FireRate"
+					}
+				},
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 672377539691748,
+					"parameters": {
+						"time-scale": "1.0"
+					}
+				},
+				{
+					"id": "request-pointer-lock",
+					"objectClass": "Mouse",
+					"sid": 496622978373186,
+					"parameters": {
+						"unadjusted-movement": false
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnHealth",
+					"sid": 447436478940771,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnDamage",
+					"sid": 267796613711391,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnSpeed",
+					"sid": 693319671192313,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "BtnFireRate",
+					"sid": 317635990490063,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 203697239869543
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 107273448478668,
+					"parameters": {
+						"variable": "Player_lvl",
+						"comparison": 0,
+						"value": "5"
+					}
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 676141897193827
+				}
+			],
+			"actions": [],
+			"sid": 465417490480469,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-x",
+							"objectClass": "Player",
+							"sid": 610301134388489,
+							"parameters": {
+								"comparison": 2,
+								"x-co-ordinate": "840"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 946971010068258,
+							"parameters": {
+								"object-to-create": "Puffy",
+								"layer": "0",
+								"x": "random(1200, 1450)",
+								"y": "random(150, 780)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 171450393921918
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-x",
+							"objectClass": "Player",
+							"sid": 857295101924669,
+							"parameters": {
+								"comparison": 5,
+								"x-co-ordinate": "840"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 804601171577409,
+							"parameters": {
+								"object-to-create": "Puffy",
+								"layer": "0",
+								"x": "random(200, 450)",
+								"y": "random(150, 780)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 794983328412157
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "Puffy",
+					"sid": 874700529246631
+				}
+			],
+			"actions": [
+				{
+					"id": "set-z-elevation",
+					"objectClass": "Puffy",
+					"sid": 317746628921157,
+					"parameters": {
+						"z": "0"
+					}
+				},
+				{
+					"id": "set-max-speed",
+					"objectClass": "Puffy",
+					"sid": 795740869755951,
+					"behaviorType": "MoveTo",
+					"parameters": {
+						"max-speed": "200"
+					}
+				}
+			],
+			"sid": 147922196927492
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "Player",
+					"sid": 255237813764267,
+					"parameters": {
+						"object": "Puffy"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "Player",
+					"sid": 670455244127929,
+					"parameters": {
+						"instance-variable": "IsDead",
+						"value": "true"
+					}
+				},
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 203458173338073,
+					"parameters": {
+						"seconds": "3.0",
+						"use-timescale": true
+					}
+				},
+				{
+					"id": "restart-layout",
+					"objectClass": "System",
+					"sid": 252260024470696
+				}
+			],
+			"sid": 311015251073712
+		}
+	],
+	"sid": 964910580004812
+}

@@ -1,0 +1,9 @@
+{
+	"name": "BtnHealth",
+	"plugin-id": "Button",
+	"sid": 780049576522699,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": []
+}

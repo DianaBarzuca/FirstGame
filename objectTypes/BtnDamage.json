@@ -1,0 +1,9 @@
+{
+	"name": "BtnDamage",
+	"plugin-id": "Button",
+	"sid": 713984187635941,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": []
+}
